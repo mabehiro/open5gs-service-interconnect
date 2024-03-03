@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: open5gs-hss-config
+  labels:
+    epc-mode: hss
+data:
+  hss.yaml: |
+    db_uri: mongodb://mongodb-svc/open5gs
+    logger:
+      file: /var/log/open5gs/hss.log
+    #  level: info   # fatal|error|warn|info(default)|debug|trace
+
+    global:
+      max:
+        ue: 1024  # The number of UE can be increased depending on memory size.
+    #    peer: 64
+
+    hss:
+      freeDiameter: @sysconfdir@/freeDiameter/hss.conf
+    #  sms_over_ims: "sip:smsc.mnc001.mcc001.3gppnetwork.org:7060;transport=tcp"
+    #  use_mongodb_change_stream: true

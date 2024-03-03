@@ -1,0 +1,16 @@
+# Default values for 5gran.
+ran:
+  image:
+    repository: quay.io/motohiroabe/ueransim
+    pullPolicy: Always
+    tag: "v3.2.6"
+  amf:
+    # address: amf-open5gs-sctp
+    # port: 38412
+    #address: 192.168.1.115
+    #port: 30412
+    address: amf-open5gs-sctp # skupper
+    port: 8888  # skupper
+  user:
+    imsi: "imsi-208930000000001"
+  tac: 7

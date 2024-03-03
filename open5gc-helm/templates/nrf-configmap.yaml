@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: open5gs-nrf-config
+  labels:
+    epc-mode: nrf
+data:
+  nrf.yaml: |
+    logger:
+      file: /var/log/open5gs/nrf.log
+    #  level: info   # fatal|error|warn|info(default)|debug|trace
+
+    global:
+      max:
+        ue: 1024  # The number of UE can be increased depending on memory size.
+    #    peer: 64
+
+    nrf:
+      serving:  # 5G roaming requires PLMN in NRF
+        - plmn_id:
+            mcc: {{ .Values.core.mcc }}
+            mnc: {{ .Values.core.mcc }}
+      sbi:
+        server:
+          - address: 0.0.0.0
+            port: 7777

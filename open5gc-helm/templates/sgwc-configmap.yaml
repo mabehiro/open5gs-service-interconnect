@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: open5gs-sgwc-config
+  labels:
+    epc-mode: sgwc
+data:
+  sgwc.yaml: |
+    logger:
+      file: /var/log/open5gs/sgwc.log
+    #  level: info   # fatal|error|warn|info(default)|debug|trace
+
+    global:
+      max:
+        ue: 1024  # The number of UE can be increased depending on memory size.
+    #    peer: 64
+
+    sgwc:
+      gtpc:
+        server:
+          - dev: {{ .Values.k8s.interface }}
+      pfcp:
+        server:
+          - dev: {{ .Values.k8s.interface }}
+        client:
+          sgwu:
+            - uri: http://open5gs-sgwu:7777
